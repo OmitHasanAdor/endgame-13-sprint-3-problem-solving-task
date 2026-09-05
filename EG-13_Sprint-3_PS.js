@@ -105,3 +105,63 @@ var majorityElement = function (nums) {
     return result;
 };
 // console.log(majorityElement([-1, 0, 1, 2, -1, -4]))
+// 07. Subarray Sum Equals K
+var subarraySum = function (nums, k) {
+    // your code goes here   
+    let count = 0
+    for (let i = 0; i < nums.length; i++) {
+        let sum = 0
+        for (let j = i; j < nums.length; j++) {
+            sum += nums[j]
+            if (sum === k) {
+                count++
+            }
+        }
+    }
+    return count
+}
+// console.log(subarraySum([1, 1, 1], 2))
+
+// 08. Top K Frequent Elements
+var topKFrequent = function (nums, k) {
+    // your code goes here   
+    const count = {};
+    for (const num of nums) {
+        count[num] = (count[num] || 0) + 1
+    }
+    return Object.entries(count)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, k)
+        .map(([num]) => Number(num))
+};
+// console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2))
+
+// 09. Longest Consecutive Sequence
+var longestConsecutive = function (nums) {
+    // your code goes here
+    if (nums.length === 0) return 0
+    const numSet = new Set(nums)
+    let maxLength = 0
+    for (const num of numSet) {
+        if (!numSet.has(num - 1)) {
+            let currentNum = num
+            let currentLength = 1
+            while (numSet.has(currentNum + 1)) {
+                currentNum++
+                currentLength++
+            }
+            maxLength = Math.max(maxLength, currentLength)
+        }
+    }
+    return maxLength
+};
+// console.log(longestConsecutive([100, 4, 200, 1, 3, 2]))
+
+// 10. Sort Colors
+var sortColors = function (nums) {
+    // your code goes here   
+    nums.sort((a, b) => a - b)
+};
+// let nums = [2, 0, 2, 1, 1, 0]
+// sortColors(nums)
+// console.log(nums)
